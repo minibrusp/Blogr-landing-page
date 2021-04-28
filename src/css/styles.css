@@ -1,3 +1,25 @@
+/*
+Mobile First Design---Starting Point: 375px--
+Legend---------------------------------------
+   Globals-----------------------------------
+   Header-Masthead---------------------------
+   Main--------------------------------------
+      Header-Hero----------------------------
+      Section-Features-----------------------
+         Feature-Highlight-------------------
+   Footer------------------------------------
+   Animation---------------------------------
+      Animation-Keyframes--------------------
+   Media Queries-----------------------------
+      320px----------------------------------
+      700px----------------------------------
+      850px----------------------------------
+      1100px---------------------------------
+      1440px---------------------------------
+*/
+
+
+
 @import url('https://fonts.googleapis.com/css2?family=Overpass:wght@300;600&family=Ubuntu:wght@400;500;700&display=swap');
 
 :root {
@@ -13,6 +35,8 @@
    --Gradient2-Very-Dark-Gray-Blue: hsl(237, 17%, 21%);
    --Gradient2-Very-Dark-Desaturated-Blue: hsl(237, 23%, 32%);
 }
+
+/* Globals-----------------------------------  */
 
 html {
    box-sizing: border-box;
@@ -64,7 +88,7 @@ nav a {
 }
 
 
-/*---Header-masthead--------------------------------*/
+/* Header-Masthead--------------------------- */
 
 header.masthead>nav {
    display: flex;
@@ -85,11 +109,6 @@ nav .logo {
    width: 5.3125rem;
 }
 
-nav .logo:hover {
-   transform: scale(1.1);
-}
-
-
 nav>.nav__checkbox {
    display: none;
 }
@@ -102,6 +121,7 @@ nav>.nav__checkbox {
    display: inline-block;
    height: 2.5rem;
    width: 2.5rem;
+   transition: .3s transform;
 }
 
 .nav__menu:hover {
@@ -110,6 +130,7 @@ nav>.nav__checkbox {
 
 .nav__checkbox:checked~.nav__menu {
    background-image: url(../images/icon-close.svg);
+   transform: rotate(180deg);
 }
 
 .nav__checkbox:checked~.nav__box {
@@ -118,31 +139,43 @@ nav>.nav__checkbox {
    z-index: 1;
    text-align: center;
    height: unset;
+   transform-origin: top right;
+   transform: scale(1);
+
+}
+
+.nav__box--transition {
+   transition: all .3s;
 }
 
 header.masthead .nav__box {
-   display: block;
    position: absolute;
    top: 7.8125rem;
    opacity: 0;
-   width: 0vw;
+   width: 85vw;
    z-index: -1;
    background-color: white;
-   height: 0;
+   height: unset;
    padding: 1.875rem 1.5rem;
    border-radius: 0.3125rem;
+   transform-origin: top right;
+   transform: scale(0);
 }
 
-header.masthead .nav__box a {
+header.masthead .nav__box .nav__link {
    color: var(--Primary-Very-Dark-Blue);
    margin: 2.1875rem 0;
    width: 100%;
    display: block;
+   font-size: 1.1rem;
+   font-weight: 600;
+   cursor: pointer;
 }
 
-header.masthead .nav__box a:hover {
+header.masthead .nav__box li:hover .nav__link {
    color: var(--Neutral-Very-Dark-Grayish-Blue);
 }
+
 
 header.masthead li span {
    content: '';
@@ -155,26 +188,58 @@ header.masthead li span {
    transition: .5s transform;
 }
 
-header.masthead li:hover span {
-   transform: rotate(180deg) translateY(3px);
+span.arrow--rotate {
+   transform: rotate(180deg) translateY(2px);
 }
 
-header.masthead li:hover .nav__sublinks {
-   display: block;
+
+.nav__box li {
+   height: 0;
+   margin-bottom: 3.5rem;
+}
+
+.nav__box li.nav__li--show {
+   height: auto;
+   margin-bottom: 0;
 }
 
 header.masthead .nav__sublinks {
-   display: none;
+   display: block;
    background-color: hsl(0, 10%, 92%);
-   padding: 1.5625rem 0;
+   /* padding: 1.5625rem 0; */
    border-radius: 0.3125rem;
+   height: 0;
+   padding: 0;
+   opacity: 0;
+   width: 0;
+   overflow: hidden;
+   transition: all .3s;
+}
+
+header.masthead .nav__sublinks--show {
+   padding: 1.5625rem 0;
+   height: auto;
+   width: auto;
+   overflow: unset;
+   opacity: 1;
+   transition: all .3s;
+}
+
+header.masthead .nav__sublinks li {
+   height: auto;
+   margin-bottom: 1.35rem;
 }
 
 header.masthead .nav__sublinks a {
    font-size: 1rem;
-   margin: 1.5625rem 0 1.5625rem 0;
+   color: var(--Neutral-Very-Dark-Grayish-Blue);
 }
 
+header.masthead .nav__sublinks li:hover a {
+   color: var(--Neutral-Very-Dark-Black-Blue);
+}
+
+header.masthead .nav__sublinks li:last-of-type,
 header.masthead .nav__sublinks li:last-of-type a {
    margin-bottom: 0;
 }
@@ -182,7 +247,6 @@ header.masthead .nav__sublinks li:last-of-type a {
 header.masthead .nav__sublinks li:first-of-type a {
    margin-top: 0;
 }
-
 
 
 nav .nav__cta {
@@ -199,7 +263,13 @@ nav .nav__cta a {
 
 nav .nav__cta a:first-of-type {
    margin: 2.1875rem 0 1.25rem 0;
+   color: var(--Primary-Very-Dark-Blue);
 }
+
+nav .nav__cta a:hover:first-of-type {
+   color: var(--Gradient2-Very-Dark-Desaturated-Blue);
+}
+
 
 nav .nav__cta a:last-of-type {
    margin: 0;
@@ -220,10 +290,10 @@ nav .nav__cta a:hover:last-of-type {
    background-position: right center;
 }
 
-/*---Main--------------------------------------*/
+/* Main-------------------------------------- */
 
 
-/* Header----------  */
+/* -------- Header-Hero ---------------------------- */
 
 header.hero {
    height: 37.5rem;
@@ -289,7 +359,7 @@ header.hero p {
 }
 
 
-/* ----section features---------- */
+/* ------ Section-Features----------------------- */
 
 section.features {
    margin: 6.25rem auto;
@@ -323,7 +393,7 @@ section.features p {
    margin: 0 auto;
 }
 
-/* ----features--Highlight-------- */
+/* ------- Feature-Highlight------------------- */
 
 .feature__highlight {
    position: relative;
@@ -362,7 +432,7 @@ section.features .feature__highlight p {
    font-family: 'Overpass', sans-serif;
 }
 
-/* footer ----------  */
+/* Footer------------------------------------ */
 
 footer {
    background-color: var(--Neutral-Very-Dark-Black-Blue);
@@ -443,7 +513,164 @@ footer .sub__links a:hover:after {
 }
 
 
-/* media queries  */
+/* Animation--------------------------------- */
+
+header.hero {
+   animation: hideMarkup .3s,
+      heroContainerAnimation 1.2s .3s;
+}
+
+nav .logo {
+   animation: hideMarkup 1.5s,
+      logoAnimation1 1s forwards 1.5s,
+      logoAnimation2 1s forwards 5.5s,
+      showMarkup 1s forwards 6.5s;
+}
+
+header.hero h2 {
+   animation: hideMarkup 2s,
+      header2Animation1 1s 2s,
+      hideMarkup 1s 5.5s,
+      showMarkup 1s 6.5s;
+}
+
+header.hero p {
+   animation: hideMarkup 3s,
+      paragraphAnimation1 1s 3s,
+      hideMarkup 1s 5.5s,
+      showMarkup 1s 6.5s;
+}
+
+.hero__cta a:first-of-type {
+   animation: hideMarkup 4s,
+      ctaAnchorAnimation1 1s 4s,
+      hideMarkup 1s 5.5s,
+      showMarkup 1s 6.5s;
+}
+
+.hero__cta a:last-of-type {
+   animation: hideMarkup 4.5s,
+      ctaAnchorAnimation1 1s 4.5s,
+      hideMarkup 1s 5.5s,
+      showMarkup 1s 6.5s;
+}
+
+header.masthead .nav__box,
+.nav__menu,
+section.features,
+footer {
+   animation: hideMarkup 6.5s,
+      showMarkup 1s 6.5s;
+}
+
+
+/* ------  Animation-Keyframes-------------------- */
+
+@keyframes hideMarkup {
+   0% {
+      opacity: 0;
+   }
+
+   100% {
+      opacity: 0;
+   }
+}
+
+@keyframes showMarkup {
+   0% {
+      opacity: 0;
+   }
+
+   100% {
+      opacity: 1;
+   }
+}
+
+@keyframes heroContainerAnimation {
+   0% {
+      transform-origin: top;
+      transform: translateY(-100vh);
+   }
+}
+
+@keyframes logoAnimation1 {
+   0% {
+      opacity: 0;
+      position: absolute;
+      left: 50%;
+      transform: translateY(4rem) translateX(-50%) scale(0);
+      transform: translateX(-50%);
+   }
+
+   100% {
+      position: absolute;
+      left: 50%;
+      transform: translateY(4rem) translateX(-50%) scale(2.2);
+   }
+}
+
+@keyframes logoAnimation2 {
+   0% {
+      position: absolute;
+      left: 50%;
+      transform: translateY(4rem) translateX(-50%) scale(2.2);
+   }
+
+   10% {
+      left: 50%;
+      transform: translateY(4) translateX(-50%) scale(2.2);
+      opacity: 0;
+   }
+
+   50% {
+      transform: translate(0, 0) scale(1);
+   }
+
+   70% {
+      opacity: 0;
+      transform: translate(0, 0) scale(0.8);
+   }
+
+   80% {
+      transform: translate(0, 0) scale(1.2);
+   }
+
+   90% {
+      transform: translate(0, 0) scale(0.9);
+   }
+
+   100% {
+      opacity: 0;
+      transform: translate(0, 0) scale(1);
+   }
+}
+
+@keyframes header2Animation1 {
+   0% {
+      transform: translateX(100vw);
+   }
+}
+
+@keyframes paragraphAnimation1 {
+   0% {
+      transform: translateX(-100vw);
+   }
+}
+
+@keyframes ctaAnchorAnimation1 {
+   0% {
+      transform: scale(0);
+   }
+
+   50% {
+      transform: scale(1.1);
+   }
+}
+
+
+/* Media Queries----------------------------- */
+
+/* -------- 320px---------------------------------- */
 
 @media screen and (max-width: 320px) {
    .hero__cta {
@@ -462,10 +689,47 @@ footer .sub__links a:hover:after {
    nav .nav__cta a:last-of-type {
       min-width: 105px;
    }
+
+   @keyframes logoAnimation1 {
+      0% {
+         transform: translateY(2rem) translateX(27vw) scale(0);
+         opacity: 0;
+      }
+
+      50% {
+         opacity: 1;
+      }
+
+      100% {
+         transform: translateY(2rem) translateX(27vw) scale(2);
+      }
+   }
+
+   @keyframes logoAnimation2 {
+      0% {
+         transform: translateY(2rem) translateX(27vw) scale(2)
+      }
+
+      50% {
+         transform: translateY(0) translateX(27vw) scale(2);
+      }
+
+      80% {
+         transform: scale(0.9);
+      }
+
+      90% {
+         transform: scale(1.1);
+      }
+
+      100% {
+         transform: translateY(0) translateX(0) scale(1);
+      }
+   }
 }
 
 
-/* ------------------------ 700 ----------------*/
+/* -------------- 700px---------------------------------- */
 
 @media screen and (min-width: 700px) {
 
@@ -503,7 +767,7 @@ footer .sub__links a:hover:after {
    }
 }
 
-/* ------------------------ 850 ----------------*/
+/* ----------  850px---------------------------------- */
 
 
 @media screen and (min-width: 850px) {
@@ -529,9 +793,11 @@ footer .sub__links a:hover:after {
       border-radius: unset;
       justify-content: space-between;
       margin-left: 5vw;
+      transform: scale(1);
    }
 
-   header.masthead .nav__box a {
+   header.masthead .nav__box a,
+   header.masthead .nav__box .nav__link {
       margin: 0;
       color: var(--Neutral-White);
       font-family: 'Ubuntu', sans-serif;
@@ -539,7 +805,7 @@ footer .sub__links a:hover:after {
       font-size: 1rem;
    }
 
-   header.masthead .nav__box a:hover {
+   header.masthead .nav__box li:hover .nav__link {
       text-decoration: underline;
       color: white;
    }
@@ -554,6 +820,7 @@ footer .sub__links a:hover:after {
 
    header.masthead .nav__links li {
       margin: 1vw 1.5rem 1vw 0;
+      height: max-content;
    }
 
    header.masthead li span {
@@ -561,23 +828,43 @@ footer .sub__links a:hover:after {
       margin-left: .5vw;
    }
 
-   header.masthead li:hover .nav__sublinks {
-      display: block;
+   header.masthead .nav__sublinks {
       position: absolute;
-      top: 3rem;
-      transform: translateX(-2.5vw);
+      top: 2rem;
+      transform-origin: top center;
+      transform: translateX(0) scale(0);
       text-align: left;
-      padding: 1.5rem 1.5rem;
-      width: 19vw;
+      /* width: 19vw; */
+      width: 10.125rem;
       background-color: var(--Neutral-White);
+      overflow: hidden;
+      padding: 0 1.5rem;
+      height: 0;
+      opacity: 0;
+      z-index: -1;
    }
 
-   header.masthead li:hover .nav__sublinks a {
+   header.masthead .nav__sublinks--show {
+      position: absolute;
+      display: block;
+      top: 3rem;
+      transform: translateX(-2.5vw) scale(1);
+      text-align: left;
+      padding: 1.5rem 1.5rem;
+      height: max-content;
+      opacity: 1;
+      z-index: 1;
+      overflow: auto;
+      transition: all .3s;
+   }
+
+
+   header.masthead .nav__sublinks a {
       color: var(--Gradient2-Very-Dark-Desaturated-Blue);
       font-weight: 400;
    }
 
-   header.masthead li:hover .nav__sublinks a:hover {
+   header.masthead .nav__sublinks a:hover {
       font-weight: 600;
       text-decoration: none;
    }
@@ -585,7 +872,13 @@ footer .sub__links a:hover:after {
    nav .nav__cta {
       border: unset;
       flex-direction: row;
-      min-width: 15rem;
+      min-width: 12rem;
+      justify-content: space-between;
+   }
+
+   nav .nav__cta a:hover:first-of-type {
+      color: var(--Neutral-White);
+      text-decoration: underline;
    }
 
    nav .nav__cta a:last-of-type {
@@ -598,8 +891,6 @@ footer .sub__links a:hover:after {
       background-color: var(--Neutral-White);
       border: 1px solid var(--Neutral-White);
       background-image: unset;
-      font-family: 'Ubuntu', sans-serif;
-      font-weight: 500;
       font-size: unset;
       transition: .3s background, color .3s, border .3s;
    }
@@ -610,11 +901,14 @@ footer .sub__links a:hover:after {
       border: 1px solid var(--Primary-Very-Light-Red);
    }
 
+   header.hero {
+      background-size: 230vw, contain;
+      background-position: 19% 50%, center;
+   }
+
    header.hero h2 {
       font-size: 3.1rem;
    }
-
-
 
    .top__grid__container {
       display: grid;
@@ -672,6 +966,8 @@ footer .sub__links a:hover:after {
       align-items: center;
       margin-top: 7.8125rem;
       padding-left: 8.66666vw;
+      background-size: 85vw, contain;
+      background-position: -18vw -41vw, top;
    }
 
    .feature__highlight .illustration {
@@ -749,9 +1045,11 @@ footer .sub__links a:hover:after {
    .attribution a {
       font-size: .8rem;
    }
+
+
 }
 
-/* ------------------------ 1100 ----------------*/
+/* ----------- 1100px--------------------------------- */
 
 @media screen and (min-width: 1100px) {
 
@@ -759,6 +1057,10 @@ footer .sub__links a:hover:after {
       padding: 3.125rem 10vw 0 10vw;
    }
 
+   header.hero {
+      background-size: 212vw, contain;
+      background-position: 18% 50%, center;
+   }
 
    .top__grid__container {
       grid-template-columns: 1fr 1fr;
@@ -817,9 +1119,14 @@ footer .sub__links a:hover:after {
 }
 
 
-/* ------------------------ 1440 ----------------*/
+/* ------------ 1440px--------------------------------- */
 
 @media screen and (min-width: 1440px) {
+
+   header.hero {
+      background-size: 250vw, contain;
+      background-position: 29% 52%, center;
+   }
 
    section.features {
       margin: 3.25rem auto 6.25rem auto;
@@ -853,6 +1160,13 @@ footer .sub__links a:hover:after {
 
    .feature__highlight {
       margin: 5vw 0;
+      background-size: 67vw, contain;
+      background-position: -14.5vw -35vw, top;
+   }
+
+   .feature__highlight .illustration {
+      top: 1rem;
+      transform: scale(1.5);
    }
 
    .bot__grid__container .illustration {
