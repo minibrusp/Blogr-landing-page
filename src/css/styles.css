@@ -385,10 +385,9 @@ section.features h4 {
 }
 
 section.features p {
-   font-family: 'Ubuntu', sans-serif;
-   color: var(--Neutral-Very-Dark-Grayish-Blue);
+   color: var(--Primary-Very-Dark-Blue);
    line-height: 1.6;
-   font-size: .9rem;
+   font-size: 0.875rem;
    max-width: 16.875rem;
    margin: 0 auto;
 }
@@ -994,6 +993,7 @@ footer {
    section.features .feature__highlight__text p {
       max-width: unset;
       margin-left: 0;
+      font-size: 0.9375rem;
    }
 
    .bot__grid__container {
