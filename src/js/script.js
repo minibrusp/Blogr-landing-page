@@ -85,8 +85,13 @@
          });
          
          function isItTrueorFalse(sublink) {
+<<<<<<< HEAD
             if(thisNotEqualToNavlink === true) return sublink.classList.remove('sublink--show');
             return sublink.classList.toggle('sublink--show');
+=======
+            if(thisNotEqualToNavlink === true) return sublink.style.display = "none";
+            return sublink.style.display = "block";
+>>>>>>> 14b678469fe844eb1404be57d94cef0a3d3c820a
          }
       }
    }

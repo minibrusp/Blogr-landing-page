@@ -921,10 +921,6 @@ footer,
       outline: none;
    }
 
-   header.masthead .nav__sublinks a.sublink--show {
-      display: block;
-   }
-
    nav .nav__cta {
       border: unset;
       flex-direction: row;
