@@ -85,8 +85,9 @@
          });
          
          function isItTrueorFalse(sublink) {
-            if(thisNotEqualToNavlink === true) return sublink.style.display = "none";
-            return sublink.style.display = "block";
+            if(thisNotEqualToNavlink === true) return sublink.classList.remove('sublink--show');
+            return sublink.classList.toggle('sublink--show');
+
          }
       }
    }
